@@ -112,7 +112,7 @@
       background: radial-gradient(
         circle at center,
         rgba(0, 122, 255, 0.03) 0%,
-        rgba(175, 82, 222, 0.02) 50%,
+        rgba(0, 122, 255, 0.02) 50%,
         transparent 70%
       );
       animation: float 25s ease-in-out infinite;
@@ -122,6 +122,13 @@
     .header > * {
       position: relative;
       z-index: 1;
+    }
+
+    .header-logo {
+      width: 80px;
+      height: 80px;
+      background: url('logo.svg') center/contain no-repeat;
+      margin: 0 auto var(--spacing-lg);
     }
 
     .header h1 {
@@ -209,9 +216,9 @@
 
     .highlight {
       background: linear-gradient(135deg, 
-        rgba(0, 122, 255, 0.05) 0%, 
-        rgba(175, 82, 222, 0.03) 50%,
-        rgba(255, 45, 146, 0.02) 100%);
+        rgba(0, 122, 255, 0.04) 0%, 
+        rgba(0, 122, 255, 0.02) 50%,
+        rgba(0, 122, 255, 0.01) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       padding: var(--spacing-xl);
@@ -238,9 +245,9 @@
       padding: var(--spacing-2xl);
       border-radius: var(--radius-lg);
       background: linear-gradient(135deg, 
-        rgba(0, 122, 255, 0.08) 0%, 
-        rgba(175, 82, 222, 0.05) 50%,
-        rgba(255, 45, 146, 0.03) 100%);
+        rgba(0, 122, 255, 0.06) 0%, 
+        rgba(0, 122, 255, 0.03) 50%,
+        rgba(0, 122, 255, 0.02) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(0, 122, 255, 0.15);
@@ -444,6 +451,7 @@
 <body>
   <div class="container">
     <div class="header">
+      <div class="header-logo"></div>
       <h1>隐私政策</h1>
       <p>最后更新：2025年8月28日</p>
     </div>
@@ -619,7 +627,7 @@
         <ul>
           <li><strong>GitHub 讨论：</strong><a href="https://github.com/nil-byte/peeklink/discussions" target="_blank">在 GitHub Discussions 中提问</a></li>
           <li><strong>Chrome Web Store：</strong>通过扩展页面的评论功能反馈</li>
-          <li><strong>问题报告：</strong><a href="https://github.com/nil-byte/peeklink/issues" target="_blank">在 GitHub Issues 中报告问题</a></li>
+          <li><strong>问题反馈：</strong><a href="https://github.com/nil-byte/peeklink/discussions/categories/general" target="_blank">通过 GitHub Discussions 反馈问题</a></li>
         </ul>
       </div>
     </div>

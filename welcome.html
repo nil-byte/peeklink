@@ -116,8 +116,8 @@
       height: 200%;
       background: radial-gradient(
         circle at center,
-        rgba(0, 122, 255, 0.05) 0%,
-        rgba(175, 82, 222, 0.03) 50%,
+        rgba(0, 122, 255, 0.03) 0%,
+        rgba(0, 122, 255, 0.02) 50%,
         transparent 70%
       );
       animation: float 20s ease-in-out infinite;
@@ -133,29 +133,13 @@
       width: 120px;
       height: 120px;
       margin: 0 auto var(--spacing-lg);
-      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-purple) 50%, var(--system-pink) 100%);
+      background: url('logo.svg') center/contain no-repeat;
       border-radius: 27px; /* Apple's large icon radius */
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 64px;
-      box-shadow: 
-        0 8px 32px rgba(0, 122, 255, 0.3),
-        0 4px 16px rgba(175, 82, 222, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
       position: relative;
       overflow: hidden;
-    }
-
-    .logo::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 100%);
-      border-radius: 27px 27px 0 0;
     }
 
     h1 {
@@ -226,12 +210,11 @@
       width: 56px;
       height: 56px;
       margin-bottom: var(--spacing-lg);
-      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-purple) 100%);
+      background: linear-gradient(135deg, var(--system-blue) 0%, #0056CC 100%);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
       box-shadow: 
         0 4px 16px rgba(0, 122, 255, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -248,6 +231,14 @@
       height: 50%;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
       border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+      z-index: 1;
+      position: relative;
     }
 
     .feature-title {
@@ -563,9 +554,9 @@
     /* Tips Section */
     .tips {
       background: linear-gradient(135deg, 
-        rgba(0, 122, 255, 0.05) 0%, 
-        rgba(175, 82, 222, 0.03) 50%,
-        rgba(255, 45, 146, 0.02) 100%);
+        rgba(0, 122, 255, 0.04) 0%, 
+        rgba(0, 122, 255, 0.02) 50%,
+        rgba(0, 122, 255, 0.01) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       padding: var(--spacing-xl);
@@ -713,7 +704,7 @@
   <div class="container">
     <!-- Hero Section -->
     <div class="hero">
-      <div class="logo">🔍</div>
+      <div class="logo"></div>
       <h1>欢迎使用 PeekLink</h1>
       <p class="subtitle">让链接预览变得简单、快速、优雅</p>
     </div>
@@ -722,37 +713,67 @@
     <div class="features">
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">👆</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12l2 2 4-4"/>
+              <path d="M21 12c-1.1 0-2.1-.4-2.8-1.2l-1.4-1.4c-.8-.8-1.2-1.8-1.2-2.8 0-2.2-1.8-4-4-4h-2c-2.2 0-4 1.8-4 4v2c0 1.1-.4 2.1-1.2 2.8l-1.4 1.4c-.8.8-1.2 1.8-1.2 2.8 0 2.2 1.8 4 4 4"/>
+            </svg>
+          </div>
           <div class="feature-title">长按预览</div>
           <div class="feature-description">长按任意链接 500 毫秒，即可在悬浮窗口中预览目标页面</div>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">🖱️</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9"/>
+              <path d="M12 3v9l4 4"/>
+            </svg>
+          </div>
           <div class="feature-title">右键菜单</div>
           <div class="feature-description">右键点击链接，选择"使用 PeekLink 预览"快速打开</div>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">📱</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M9 3v18"/>
+              <path d="M16 12l-3-3 3-3"/>
+            </svg>
+          </div>
           <div class="feature-title">多种视图</div>
           <div class="feature-description">支持悬浮窗口、侧边栏和新标签页三种预览方式</div>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">🎮</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
           <div class="feature-title">完全交互</div>
           <div class="feature-description">在预览窗口中滚动、点击、填写表单，如同真实浏览</div>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">🔓</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </div>
           <div class="feature-title">智能绕过</div>
           <div class="feature-description">自动处理 iframe 限制，让更多网站支持预览</div>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">🛡️</div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
           <div class="feature-title">隐私安全</div>
           <div class="feature-description">不收集任何数据，所有处理都在本地完成</div>
         </div>
@@ -761,7 +782,9 @@
       <!-- Quick Start -->
       <div class="quick-start">
         <h2 class="section-title">
-          <span>🚀</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
           <span>快速开始</span>
         </h2>
         <div class="steps">
@@ -794,7 +817,11 @@
       <!-- Tips -->
       <div class="tips">
         <h2 class="section-title">
-          <span>💡</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4"/>
+            <path d="M12 8h.01"/>
+          </svg>
           <span>专业技巧</span>
         </h2>
         <ul class="tips-list">
@@ -810,7 +837,10 @@
       <!-- Shortcuts -->
       <div class="shortcuts">
         <h2 class="section-title">
-          <span>⌨️</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="6" y="4" width="4" height="16" rx="2"/>
+            <rect x="14" y="4" width="4" height="16" rx="2"/>
+          </svg>
           <span>快捷键</span>
         </h2>
         <div class="shortcut-grid">
@@ -838,10 +868,16 @@
     <div class="actions">
       <button class="btn btn-primary" onclick="window.close()">
         <span>开始使用</span>
-        <span>→</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"/>
+          <path d="M12 5l7 7-7 7"/>
+        </svg>
       </button>
       <button class="btn btn-secondary" onclick="chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open('chrome://extensions/?id=' + chrome.runtime.id)">
-        <span>⚙️</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-10.5l-4.5 4.5m0 6l4.5 4.5m-16-1l4.5-4.5m0-6L3.5 3.5"/>
+        </svg>
         <span>打开设置</span>
       </button>
     </div>
