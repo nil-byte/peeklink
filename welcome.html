@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>欢迎使用 PeekLink</title>
+  <link rel="icon" type="image/png" href="icon32.png">
+  <link rel="apple-touch-icon" href="icon128.png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
     
@@ -369,42 +371,53 @@
 
     .shortcut-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: var(--spacing-md);
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .shortcut-item {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      padding: var(--spacing-md) var(--spacing-lg);
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      text-align: center;
+      padding: var(--spacing-xl);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-lg);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: var(--shadow-subtle);
     }
 
     .shortcut-item:hover {
-      background: rgba(255, 255, 255, 0.9);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-elevated);
+      border-color: rgba(0, 122, 255, 0.2);
+    }
+
+    .shortcut-item .shortcut-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
     }
 
     .shortcut-key {
       font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
       font-size: 14px;
       font-weight: 500;
-      padding: 6px 12px;
-      background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
-      border: 1px solid var(--separator);
-      border-radius: var(--radius-xs);
-      color: var(--text-primary);
-      box-shadow: 
-        0 1px 3px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(0, 122, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 122, 255, 0.2);
+      border-radius: var(--radius-sm);
+      color: var(--system-blue);
+      box-shadow: var(--shadow-minimal);
       letter-spacing: 0.5px;
+      margin-top: var(--spacing-xs);
     }
 
     /* Action Buttons */
@@ -704,9 +717,9 @@
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 12l2 2 4-4"/>
-              <path d="M21 12c-1.1 0-2.1-.4-2.8-1.2l-1.4-1.4c-.8-.8-1.2-1.8-1.2-2.8 0-2.2-1.8-4-4-4h-2c-2.2 0-4 1.8-4 4v2c0 1.1-.4 2.1-1.2 2.8l-1.4 1.4c-.8.8-1.2 1.8-1.2 2.8 0 2.2 1.8 4 4 4"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
             </svg>
           </div>
           <div class="feature-title">长按预览</div>
@@ -715,9 +728,8 @@
         
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 12a9 9 0 1 0 9-9"/>
-              <path d="M12 3v9l4 4"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
           </div>
           <div class="feature-title">右键菜单</div>
@@ -726,10 +738,11 @@
         
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <path d="M9 3v18"/>
-              <path d="M16 12l-3-3 3-3"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
           </div>
           <div class="feature-title">多种视图</div>
@@ -738,8 +751,9 @@
         
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12l2 2 4-4"/>
             </svg>
           </div>
           <div class="feature-title">完全交互</div>
@@ -748,9 +762,9 @@
         
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2"/>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.5L16.5 4H10a2 2 0 00-2 2z"/>
+              <polyline points="14,4 14,7 17,7"/>
             </svg>
           </div>
           <div class="feature-title">智能绕过</div>
@@ -759,9 +773,8 @@
         
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="M9 12l2 2 4-4"/>
             </svg>
           </div>
           <div class="feature-title">隐私安全</div>
@@ -772,8 +785,9 @@
       <!-- Quick Start -->
       <div class="quick-start">
         <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6"/>
           </svg>
           <span>快速开始</span>
         </h2>
@@ -807,17 +821,16 @@
       <!-- Tips -->
       <div class="tips">
         <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4"/>
-            <path d="M12 8h.01"/>
+            <path d="M12 8v8"/>
           </svg>
           <span>专业技巧</span>
         </h2>
         <ul class="tips-list">
           <li>拖动标题栏可以移动预览窗口到任何位置</li>
           <li>拖动窗口边缘和角落可以自由调整大小</li>
-          <li>点击固定按钮 📌 让窗口始终保持在最前面</li>
+          <li>点击固定按钮让窗口始终保持在最前面</li>
           <li>使用工具栏快速切换到侧边栏或新标签页视图</li>
           <li>点击窗口外部区域或按 ESC 键快速关闭预览</li>
           <li>预览窗口支持完整的网页交互，包括视频播放和表单提交</li>
@@ -827,28 +840,28 @@
       <!-- Shortcuts -->
       <div class="shortcuts">
         <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="6" y="4" width="4" height="16" rx="2"/>
-            <rect x="14" y="4" width="4" height="16" rx="2"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M7 9h4m-4 4h6"/>
           </svg>
           <span>快捷键</span>
         </h2>
         <div class="shortcut-grid">
           <div class="shortcut-item">
-            <span>打开侧边栏</span>
+            <div class="shortcut-title">打开侧边栏</div>
             <span class="shortcut-key">Alt+Shift+Q</span>
           </div>
           <div class="shortcut-item">
-            <span>新标签页打开</span>
+            <div class="shortcut-title">新标签页打开</div>
             <span class="shortcut-key">Alt+Shift+T</span>
           </div>
           <div class="shortcut-item">
-            <span>关闭预览</span>
+            <div class="shortcut-title">关闭预览</div>
             <span class="shortcut-key">ESC</span>
           </div>
           <div class="shortcut-item">
-            <span>固定窗口</span>
-            <span class="shortcut-key">点击 📌</span>
+            <div class="shortcut-title">固定窗口</div>
+            <span class="shortcut-key">点击固定按钮</span>
           </div>
         </div>
       </div>
@@ -858,15 +871,14 @@
     <div class="actions">
       <button class="btn btn-primary" onclick="window.close()">
         <span>开始使用</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14"/>
-          <path d="M12 5l7 7-7 7"/>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 12h14l-7-7m7 7l-7 7"/>
         </svg>
       </button>
       <button class="btn btn-secondary" onclick="chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open('chrome://extensions/?id=' + chrome.runtime.id)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="3"/>
-          <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.5-10.5l-4.5 4.5m0 6l4.5 4.5m-16-1l4.5-4.5m0-6L3.5 3.5"/>
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
         </svg>
         <span>打开设置</span>
       </button>
