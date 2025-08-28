@@ -873,6 +873,7 @@
           <li>使用工具栏快速切换到侧边栏或新标签页视图</li>
           <li>点击窗口外部区域或按 ESC 键快速关闭预览</li>
           <li>预览窗口支持完整的网页交互，包括视频播放和表单提交</li>
+          <li>右键点击扩展图标，选择"选项"即可打开设置页面</li>
         </ul>
       </div>
 
@@ -914,14 +915,6 @@
           <path d="M5 12h14l-7-7m7 7l-7 7" />
         </svg>
       </button>
-      <button class="btn btn-secondary" id="openSettingsBtn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="3" />
-          <path
-            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-        </svg>
-        <span>打开设置</span>
-      </button>
     </div>
 
     <!-- Footer -->
@@ -936,47 +929,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // 处理设置按钮点击
-    document.getElementById('openSettingsBtn').addEventListener('click', function() {
-      try {
-        // 检查是否在扩展环境中
-        if (typeof chrome !== 'undefined' && chrome.runtime) {
-          if (chrome.runtime.openOptionsPage) {
-            // 使用扩展API打开设置页面
-            chrome.runtime.openOptionsPage();
-          } else if (chrome.runtime.id) {
-            // 降级方案：直接打开设置页面
-            window.open(chrome.runtime.getURL('settings.html'));
-          } else {
-            // 再次降级：打开扩展管理页面
-            window.open('chrome://extensions/');
-          }
-        } else {
-          // 如果不在扩展环境中，提供友好提示
-          alert('请在Chrome扩展中访问此页面以打开设置');
-        }
-      } catch (error) {
-        console.warn('无法打开设置页面:', error);
-        // 最终降级方案：尝试打开本地设置页面
-        try {
-          window.open('settings.html');
-        } catch (e) {
-          alert('无法打开设置页面，请右键点击扩展图标选择"选项"');
-        }
-      }
-    });
-
-    // 处理获取扩展按钮点击  
-    const primaryBtn = document.querySelector('.btn-primary');
-    if (primaryBtn) {
-      primaryBtn.addEventListener('click', function() {
-        // 跳转到Chrome Web Store或下载页面
-        window.open('https://chromewebstore.google.com/');
-      });
-    }
-  </script>
 </body>
 
 </html>
