@@ -1,0 +1,5 @@
+theme: 
+title: PeekLink
+description: Chrome extension for instant link preview with iframe bypass capability
+url: https://nil-byte.github.io
+baseurl: /peeklink

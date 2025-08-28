@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欢迎使用 PeekLink</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    
+    :root {
+      /* Apple Design System Colors */
+      --system-blue: #007AFF;
+      --system-blue-hover: #0056CC;
+      --system-green: #30D158;
+      --system-purple: #AF52DE;
+      --system-pink: #FF2D92;
+      --system-orange: #FF9F0A;
+      --system-red: #FF3B30;
+      --system-teal: #40C8E0;
+      --system-indigo: #5856D6;
+      --system-yellow: #FFD60A;
+      
+      /* Apple Background Colors */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f2f2f7;
+      --bg-tertiary: #fafafa;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-glass: rgba(255, 255, 255, 0.8);
+      
+      /* Apple Text Colors */
+      --text-primary: #000000;
+      --text-secondary: #3C3C43;
+      --text-tertiary: #3C3C4399;
+      --text-quaternary: #3C3C434D;
+      --text-link: #007AFF;
+      
+      /* Apple Border & Shadow */
+      --border-color: #3C3C4349;
+      --separator: #C6C6C8;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
+      
+      /* Apple Spacing */
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      
+      /* Apple Border Radius */
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .container {
+      max-width: 980px;
+      width: 100%;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl) var(--spacing-2xl);
+      text-align: center;
+      background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(245, 245, 247, 0.8) 60%,
+        rgba(242, 242, 247, 0.6) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center,
+        rgba(0, 122, 255, 0.05) 0%,
+        rgba(175, 82, 222, 0.03) 50%,
+        transparent 70%
+      );
+      animation: float 20s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto var(--spacing-lg);
+      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-purple) 50%, var(--system-pink) 100%);
+      border-radius: 27px; /* Apple's large icon radius */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      box-shadow: 
+        0 8px 32px rgba(0, 122, 255, 0.3),
+        0 4px 16px rgba(175, 82, 222, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, transparent 100%);
+      border-radius: 27px 27px 0 0;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.07143;
+      letter-spacing: -0.005em;
+      margin-bottom: var(--spacing-md);
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: var(--text-primary); /* Fallback */
+    }
+
+    .subtitle {
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.14286;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-2xl);
+      letter-spacing: 0.007em;
+    }
+
+    /* Features Grid */
+    .features {
+      padding: var(--spacing-2xl);
+      background: var(--bg-primary);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .feature-card {
+      padding: var(--spacing-xl);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(0, 122, 255, 0.2);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--spacing-lg);
+      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-purple) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 
+        0 4px 16px rgba(0, 122, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .feature-title {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.21053;
+      margin-bottom: var(--spacing-sm);
+      color: var(--text-primary);
+      letter-spacing: 0.012em;
+    }
+
+    .feature-description {
+      font-size: 17px;
+      line-height: 1.47059;
+      color: var(--text-secondary);
+      letter-spacing: -0.022em;
+    }
+
+    /* Quick Start Section */
+    .quick-start {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quick-start::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.14286;
+      margin-bottom: var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      color: var(--text-primary);
+      letter-spacing: 0.007em;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-blue-hover) 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 17px;
+      flex-shrink: 0;
+      box-shadow: 
+        0 4px 12px rgba(0, 122, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+      border-radius: 50% 50% 0 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 1.21053;
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-primary);
+      letter-spacing: 0.012em;
+    }
+
+    .step-description {
+      font-size: 17px;
+      line-height: 1.47059;
+      color: var(--text-secondary);
+      letter-spacing: -0.022em;
+    }
+
+    /* Shortcuts */
+    .shortcuts {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shortcuts::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+    }
+
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--spacing-md);
+    }
+
+    .shortcut-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .shortcut-item:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .shortcut-key {
+      font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
+      border: 1px solid var(--separator);
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.5px;
+    }
+
+    /* Action Buttons */
+    .actions {
+      padding: 0 var(--spacing-2xl) var(--spacing-2xl);
+      display: flex;
+      gap: var(--spacing-lg);
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 16px 40px;
+      border-radius: 980px; /* Apple's pill button radius */
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 1.21053;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      letter-spacing: 0.012em;
+      min-width: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+      border-radius: 980px 980px 0 0;
+      pointer-events: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-blue-hover) 100%);
+      color: white;
+      box-shadow: 
+        0 4px 16px rgba(0, 122, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--system-blue-hover) 0%, #0040A0 100%);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 8px 24px rgba(0, 122, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border-color: rgba(0, 122, 255, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+      padding: var(--spacing-xl) var(--spacing-2xl);
+      background: linear-gradient(180deg, 
+        rgba(242, 242, 247, 0.8) 0%, 
+        rgba(255, 255, 255, 0.9) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .footer-links a {
+      color: var(--text-link);
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.47059;
+      letter-spacing: -0.022em;
+      transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--system-blue);
+      transform: scaleX(0);
+      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .footer-links a:hover {
+      color: var(--system-blue-hover);
+    }
+
+    .footer-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .footer-text {
+      font-size: 15px;
+      line-height: 1.33337;
+      color: var(--text-tertiary);
+      letter-spacing: -0.016em;
+    }
+
+    /* Tips Section */
+    .tips {
+      background: linear-gradient(135deg, 
+        rgba(0, 122, 255, 0.05) 0%, 
+        rgba(175, 82, 222, 0.03) 50%,
+        rgba(255, 45, 146, 0.02) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 122, 255, 0.1);
+      margin-bottom: var(--spacing-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tips::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 122, 255, 0.3) 50%, transparent 100%);
+    }
+
+    .tips-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tips-list li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: var(--spacing-md);
+      font-size: 17px;
+      line-height: 1.47059;
+      color: var(--text-secondary);
+      letter-spacing: -0.022em;
+    }
+
+    .tips-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      color: var(--system-green);
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      h1 {
+        font-size: 40px;
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        font-size: 22px;
+        line-height: 1.18182;
+      }
+
+      .features {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+
+      .actions {
+        flex-direction: column;
+        padding: 0 var(--spacing-lg) var(--spacing-xl);
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .footer {
+        padding: var(--spacing-lg);
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+
+      .section-title {
+        font-size: 24px;
+        line-height: 1.16667;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .feature-card {
+      animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      opacity: 0;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:nth-child(4) { animation-delay: 0.4s; }
+    .feature-card:nth-child(5) { animation-delay: 0.5s; }
+    .feature-card:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="logo">🔍</div>
+      <h1>欢迎使用 PeekLink</h1>
+      <p class="subtitle">让链接预览变得简单、快速、优雅</p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👆</div>
+          <div class="feature-title">长按预览</div>
+          <div class="feature-description">长按任意链接 500 毫秒，即可在悬浮窗口中预览目标页面</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🖱️</div>
+          <div class="feature-title">右键菜单</div>
+          <div class="feature-description">右键点击链接，选择"使用 PeekLink 预览"快速打开</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">多种视图</div>
+          <div class="feature-description">支持悬浮窗口、侧边栏和新标签页三种预览方式</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <div class="feature-title">完全交互</div>
+          <div class="feature-description">在预览窗口中滚动、点击、填写表单，如同真实浏览</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔓</div>
+          <div class="feature-title">智能绕过</div>
+          <div class="feature-description">自动处理 iframe 限制，让更多网站支持预览</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-title">隐私安全</div>
+          <div class="feature-description">不收集任何数据，所有处理都在本地完成</div>
+        </div>
+      </div>
+
+      <!-- Quick Start -->
+      <div class="quick-start">
+        <h2 class="section-title">
+          <span>🚀</span>
+          <span>快速开始</span>
+        </h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <div class="step-title">找到任意链接</div>
+              <div class="step-description">在任何网页上找到您想预览的链接</div>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <div class="step-title">长按 500 毫秒</div>
+              <div class="step-description">将鼠标悬停在链接上并长按，或使用右键菜单</div>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <div class="step-title">开始预览</div>
+              <div class="step-description">预览窗口自动弹出，您可以自由交互和操作</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips -->
+      <div class="tips">
+        <h2 class="section-title">
+          <span>💡</span>
+          <span>专业技巧</span>
+        </h2>
+        <ul class="tips-list">
+          <li>拖动标题栏可以移动预览窗口到任何位置</li>
+          <li>拖动窗口边缘和角落可以自由调整大小</li>
+          <li>点击固定按钮 📌 让窗口始终保持在最前面</li>
+          <li>使用工具栏快速切换到侧边栏或新标签页视图</li>
+          <li>点击窗口外部区域或按 ESC 键快速关闭预览</li>
+          <li>预览窗口支持完整的网页交互，包括视频播放和表单提交</li>
+        </ul>
+      </div>
+
+      <!-- Shortcuts -->
+      <div class="shortcuts">
+        <h2 class="section-title">
+          <span>⌨️</span>
+          <span>快捷键</span>
+        </h2>
+        <div class="shortcut-grid">
+          <div class="shortcut-item">
+            <span>打开侧边栏</span>
+            <span class="shortcut-key">Alt+Shift+Q</span>
+          </div>
+          <div class="shortcut-item">
+            <span>新标签页打开</span>
+            <span class="shortcut-key">Alt+Shift+T</span>
+          </div>
+          <div class="shortcut-item">
+            <span>关闭预览</span>
+            <span class="shortcut-key">ESC</span>
+          </div>
+          <div class="shortcut-item">
+            <span>固定窗口</span>
+            <span class="shortcut-key">点击 📌</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn btn-primary" onclick="window.close()">
+        <span>开始使用</span>
+        <span>→</span>
+      </button>
+      <button class="btn btn-secondary" onclick="chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open('chrome://extensions/?id=' + chrome.runtime.id)">
+        <span>⚙️</span>
+        <span>打开设置</span>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-links">
+        <a href="privacy.html" target="_blank">隐私政策</a>
+        <a href="https://github.com/nil-byte/peeklink/discussions" target="_blank">反馈建议</a>
+        <a href="https://chromewebstore.google.com/detail/peeklink" target="_blank">Chrome 商店</a>
+      </div>
+      <div class="footer-text">
+        © 2025 PeekLink v1.0.0 · Made with ❤️ for better browsing
+      </div>
+    </div>
+  </div>
+</body>
+</html>
