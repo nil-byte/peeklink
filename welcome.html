@@ -8,55 +8,44 @@
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
     
     :root {
-      /* Apple Design System Colors */
+      /* Apple System Colors - Minimal */
       --system-blue: #007AFF;
       --system-blue-hover: #0056CC;
-      --system-green: #30D158;
-      --system-purple: #AF52DE;
-      --system-pink: #FF2D92;
-      --system-orange: #FF9F0A;
-      --system-red: #FF3B30;
-      --system-teal: #40C8E0;
-      --system-indigo: #5856D6;
-      --system-yellow: #FFD60A;
+      --system-gray: #8E8E93;
+      --system-gray-light: #C7C7CC;
+      --system-gray-extra-light: #F2F2F7;
       
-      /* Apple Background Colors */
-      --bg-primary: #ffffff;
-      --bg-secondary: #f2f2f7;
-      --bg-tertiary: #fafafa;
-      --bg-card: rgba(255, 255, 255, 0.95);
+      /* Minimal Background Colors */
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #FAFAFA;
       --bg-glass: rgba(255, 255, 255, 0.8);
+      --bg-glass-light: rgba(255, 255, 255, 0.6);
       
-      /* Apple Text Colors */
+      /* Minimal Text Colors */
       --text-primary: #000000;
       --text-secondary: #3C3C43;
-      --text-tertiary: #3C3C4399;
-      --text-quaternary: #3C3C434D;
-      --text-link: #007AFF;
+      --text-tertiary: rgba(60, 60, 67, 0.6);
+      --text-quaternary: rgba(60, 60, 67, 0.3);
       
-      /* Apple Border & Shadow */
-      --border-color: #3C3C4349;
-      --separator: #C6C6C8;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
-      --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
+      /* Minimal Shadows & Effects */
+      --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-float: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-elevated: 0 8px 30px rgba(0, 0, 0, 0.12);
       
-      /* Apple Spacing */
+      /* Minimal Spacing */
       --spacing-xs: 4px;
       --spacing-sm: 8px;
       --spacing-md: 16px;
       --spacing-lg: 24px;
       --spacing-xl: 32px;
       --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
       
-      /* Apple Border Radius */
-      --radius-xs: 4px;
+      /* Apple Radius */
       --radius-sm: 8px;
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-xl: 20px;
-      --radius-2xl: 24px;
     }
 
     * {
@@ -66,8 +55,8 @@
     }
 
     body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.47059;
       font-weight: 400;
@@ -75,22 +64,23 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
+      margin: 0;
+      padding: var(--spacing-lg);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--spacing-lg);
     }
 
     .container {
       max-width: 980px;
       width: 100%;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: var(--radius-2xl);
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-xl);
+      background: var(--bg-glass);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-elevated);
       overflow: hidden;
       margin: 0 auto;
     }
@@ -133,7 +123,7 @@
       width: 120px;
       height: 120px;
       margin: 0 auto var(--spacing-lg);
-      background: url('logo.svg') center/contain no-repeat;
+      background: url('icon128.png') center/contain no-repeat;
       border-radius: 27px; /* Apple's large icon radius */
       display: flex;
       align-items: center;

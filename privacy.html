@@ -9,41 +9,32 @@
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
     
     :root {
-      /* Apple Design System Colors */
+      /* Apple System Colors - Minimal Blue Focus */
       --system-blue: #007AFF;
-      --system-blue-hover: #0056CC;
-      --system-green: #30D158;
-      --system-purple: #AF52DE;
-      --system-pink: #FF2D92;
-      --system-orange: #FF9F0A;
-      --system-red: #FF3B30;
-      --system-teal: #40C8E0;
-      --system-indigo: #5856D6;
-      --system-yellow: #FFD60A;
+      --system-gray: #8E8E93;
+      --system-gray2: #AEAEB2;
+      --system-gray3: #C7C7CC;
+      --system-gray4: #D1D1D6;
+      --system-gray5: #E5E5EA;
+      --system-gray6: #F2F2F7;
       
-      /* Apple Background Colors */
+      /* Minimal Background Colors */
       --bg-primary: #ffffff;
-      --bg-secondary: #f2f2f7;
-      --bg-tertiary: #fafafa;
-      --bg-card: rgba(255, 255, 255, 0.95);
-      --bg-glass: rgba(255, 255, 255, 0.8);
+      --bg-glass: rgba(255, 255, 255, 0.9);
+      --bg-translucent: rgba(255, 255, 255, 0.7);
       
-      /* Apple Text Colors */
-      --text-primary: #000000;
-      --text-secondary: #3C3C43;
-      --text-tertiary: #3C3C4399;
-      --text-quaternary: #3C3C434D;
+      /* Minimal Text Colors */
+      --text-primary: #1D1D1F;
+      --text-secondary: #86868B;
+      --text-tertiary: #A1A1A6;
       --text-link: #007AFF;
       
-      /* Apple Border & Shadow */
-      --border-color: #3C3C4349;
-      --separator: #C6C6C8;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
-      --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
+      /* Minimal Shadows & Effects */
+      --shadow-minimal: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-subtle: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-elevated: 0 4px 16px rgba(0,0,0,0.08);
       
-      /* Apple Spacing */
+      /* Minimal Spacing */
       --spacing-xs: 4px;
       --spacing-sm: 8px;
       --spacing-md: 16px;
@@ -71,7 +62,7 @@
       margin: 0;
       padding: 0;
       font-family: var(--font-family-system);
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      background: #ffffff;
       color: var(--text-primary);
       line-height: 1.47059;
       font-weight: 400;
@@ -87,17 +78,22 @@
       max-width: 980px;
       margin: 0 auto;
       padding: 0;
+      background: var(--bg-glass);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-elevated);
+      overflow: hidden;
     }
 
     .header {
       text-align: center;
       padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-      border: 1px solid var(--border-color);
-      border-bottom: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-bottom: 1px solid rgba(0, 122, 255, 0.1);
       position: relative;
       overflow: hidden;
     }
@@ -127,7 +123,7 @@
     .header-logo {
       width: 80px;
       height: 80px;
-      background: url('logo.svg') center/contain no-repeat;
+      background: url('icon128.png') center/contain no-repeat;
       margin: 0 auto var(--spacing-lg);
     }
 
@@ -154,13 +150,10 @@
     }
 
     .content {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.93));
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
       padding: var(--spacing-2xl);
-      border: 1px solid var(--border-color);
-      border-top: none;
       position: relative;
       overflow: hidden;
     }
