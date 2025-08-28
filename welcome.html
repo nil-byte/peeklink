@@ -192,9 +192,14 @@
     }
 
     .feature-card:hover {
-      background: rgba(255, 255, 255, 0.9);
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: var(--shadow-lg);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-elevated);
+      border-color: rgba(0, 122, 255, 0.15);
+    }
+
+    .feature-card:hover .feature-icon {
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.15) 0%, rgba(0, 122, 255, 0.08) 100%);
       border-color: rgba(0, 122, 255, 0.2);
     }
 
@@ -202,16 +207,15 @@
       width: 56px;
       height: 56px;
       margin-bottom: var(--spacing-lg);
-      background: linear-gradient(135deg, var(--system-blue) 0%, #0056CC 100%);
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(0, 122, 255, 0.05) 100%);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 
-        0 4px 16px rgba(0, 122, 255, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow: var(--shadow-subtle);
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(0, 122, 255, 0.1);
     }
 
     .feature-icon::before {
@@ -221,16 +225,17 @@
       left: 0;
       right: 0;
       height: 50%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
       border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
 
     .feature-icon svg {
       width: 28px;
       height: 28px;
-      color: white;
+      color: var(--system-blue);
       z-index: 1;
       position: relative;
+      opacity: 1;
     }
 
     .feature-title {
@@ -284,6 +289,11 @@
       letter-spacing: 0.007em;
     }
 
+    .section-title svg {
+      color: var(--system-blue);
+      opacity: 0.8;
+    }
+
     .steps {
       display: flex;
       flex-direction: column;
@@ -299,8 +309,9 @@
     .step-number {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-blue-hover) 100%);
-      color: white;
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(0, 122, 255, 0.05) 100%);
+      color: var(--system-blue);
+      border: 1px solid rgba(0, 122, 255, 0.2);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -596,13 +607,15 @@
     }
 
     .tips-list li:before {
-      content: "✓";
+      content: "";
       position: absolute;
-      left: 0;
-      top: 2px;
-      color: var(--system-green);
-      font-weight: 600;
-      font-size: 16px;
+      left: 8px;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      background: var(--system-blue);
+      border-radius: 50%;
+      opacity: 0.6;
     }
 
     /* Responsive Design */
