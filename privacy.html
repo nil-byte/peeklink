@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>隐私政策 - PeekLink</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    
+    :root {
+      /* Apple Design System Colors */
+      --system-blue: #007AFF;
+      --system-blue-hover: #0056CC;
+      --system-green: #30D158;
+      --system-purple: #AF52DE;
+      --system-pink: #FF2D92;
+      --system-orange: #FF9F0A;
+      --system-red: #FF3B30;
+      --system-teal: #40C8E0;
+      --system-indigo: #5856D6;
+      --system-yellow: #FFD60A;
+      
+      /* Apple Background Colors */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f2f2f7;
+      --bg-tertiary: #fafafa;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-glass: rgba(255, 255, 255, 0.8);
+      
+      /* Apple Text Colors */
+      --text-primary: #000000;
+      --text-secondary: #3C3C43;
+      --text-tertiary: #3C3C4399;
+      --text-quaternary: #3C3C434D;
+      --text-link: #007AFF;
+      
+      /* Apple Border & Shadow */
+      --border-color: #3C3C4349;
+      --separator: #C6C6C8;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
+      
+      /* Apple Spacing */
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      
+      /* Apple Border Radius */
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 24px;
+      
+      /* Apple Typography */
+      --font-family-system: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family-system);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      padding: var(--spacing-lg);
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .header {
+      text-align: center;
+      padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl);
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center,
+        rgba(0, 122, 255, 0.03) 0%,
+        rgba(175, 82, 222, 0.02) 50%,
+        transparent 70%
+      );
+      animation: float 25s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .header > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header h1 {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.07143;
+      color: var(--text-primary);
+      margin: 0 0 var(--spacing-md) 0;
+      letter-spacing: -0.005em;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.381;
+      color: var(--text-secondary);
+      margin: 0;
+      letter-spacing: 0.011em;
+    }
+
+    .content {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+      padding: var(--spacing-2xl);
+      border: 1px solid var(--border-color);
+      border-top: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.125;
+      color: var(--text-primary);
+      margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+      letter-spacing: 0.004em;
+    }
+
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.16667;
+      color: var(--text-primary);
+      margin: var(--spacing-xl) 0 var(--spacing-md) 0;
+      letter-spacing: 0.009em;
+    }
+
+    p,
+    li {
+      font-size: 17px;
+      line-height: 1.47059;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-md);
+      letter-spacing: -0.022em;
+    }
+
+    ul {
+      padding-left: var(--spacing-xl);
+    }
+
+    li {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, 
+        rgba(0, 122, 255, 0.05) 0%, 
+        rgba(175, 82, 222, 0.03) 50%,
+        rgba(255, 45, 146, 0.02) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 122, 255, 0.1);
+      margin: var(--spacing-lg) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 122, 255, 0.3) 50%, transparent 100%);
+    }
+
+    .contact {
+      text-align: left;
+      margin-top: var(--spacing-2xl);
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, 
+        rgba(0, 122, 255, 0.08) 0%, 
+        rgba(175, 82, 222, 0.05) 50%,
+        rgba(255, 45, 146, 0.03) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 122, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 122, 255, 0.4) 50%, transparent 100%);
+    }
+
+    .contact h2 {
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-lg);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.14286;
+      letter-spacing: 0.007em;
+    }
+
+    .contact ul {
+      list-style: none;
+      padding: 0;
+      margin-top: var(--spacing-lg);
+    }
+
+    .contact li {
+      margin: var(--spacing-md) 0;
+      font-size: 17px;
+      line-height: 1.47059;
+      letter-spacing: -0.022em;
+    }
+
+    .contact a {
+      color: var(--system-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+    }
+
+    .contact a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--system-blue);
+      transform: scaleX(0);
+      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact a:hover {
+      color: var(--system-blue-hover);
+    }
+
+    .contact a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .content h2 {
+      animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      opacity: 0;
+    }
+
+    .content h2:nth-of-type(1) { animation-delay: 0.1s; }
+    .content h2:nth-of-type(2) { animation-delay: 0.2s; }
+    .content h2:nth-of-type(3) { animation-delay: 0.3s; }
+    .content h2:nth-of-type(4) { animation-delay: 0.4s; }
+    .content h2:nth-of-type(5) { animation-delay: 0.5s; }
+    .content h2:nth-of-type(6) { animation-delay: 0.6s; }
+
+    /* Typography enhancements */
+    code {
+      font-family: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 2px 6px;
+      background: rgba(0, 122, 255, 0.1);
+      border: 1px solid rgba(0, 122, 255, 0.2);
+      border-radius: var(--radius-xs);
+      color: var(--system-blue);
+      letter-spacing: 0.5px;
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: var(--spacing-md);
+      }
+
+      .header {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      .header h1 {
+        font-size: 40px;
+        line-height: 1.1;
+      }
+
+      .header p {
+        font-size: 18px;
+        line-height: 1.33333;
+      }
+
+      .content {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      h2 {
+        font-size: 28px;
+        line-height: 1.14286;
+      }
+
+      h3 {
+        font-size: 21px;
+        line-height: 1.19048;
+      }
+
+      .contact {
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+
+      .contact h2 {
+        font-size: 24px;
+        line-height: 1.16667;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 32px;
+      }
+
+      .header p {
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      h3 {
+        font-size: 19px;
+      }
+
+      p, li {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>隐私政策</h1>
+      <p>最后更新：2025年8月28日</p>
+    </div>
+
+    <div class="content">
+      <h2>概述</h2>
+      <p>PeekLink 是一款 Chrome 浏览器扩展，旨在通过长按或拖拽链接来提供即时的网页预览功能。我们非常重视您的隐私，承诺保护您的个人信息和浏览数据。</p>
+
+      <div class="highlight">
+        <p><strong>核心承诺：PeekLink 不收集、存储或传输任何个人浏览数据。</strong></p>
+      </div>
+
+      <h2>我们收集的信息</h2>
+      <h3>我们不收集的数据</h3>
+      <ul>
+        <li><strong>浏览历史</strong>：我们不记录您访问的网站或浏览行为</li>
+        <li><strong>个人信息</strong>：我们不收集姓名、邮箱、电话等个人身份信息</li>
+        <li><strong>网页内容</strong>：我们不读取、存储或分析您预览的网页内容</li>
+        <li><strong>搜索记录</strong>：我们不跟踪您的搜索查询或结果</li>
+        <li><strong>位置信息</strong>：我们不获取或使用您的地理位置</li>
+      </ul>
+
+      <h3>本地存储的设置数据</h3>
+      <p>PeekLink 仅在您的设备上本地存储以下设置信息：</p>
+      <ul>
+        <li>预览窗口大小和位置偏好</li>
+        <li>主题设置（深色/浅色模式）</li>
+        <li>长按延迟时间设置（默认500毫秒）</li>
+        <li>快捷键启用状态</li>
+        <li>预览模式偏好（悬浮窗口/侧边栏/新标签页）</li>
+        <li>网站特定的预览设置</li>
+        <li>其他用户界面偏好设置</li>
+      </ul>
+      <p>这些设置通过 Chrome 的 <code>chrome.storage.sync</code> API 存储，仅用于在您的不同设备间同步设置，不会发送给我们或任何第三方。</p>
+
+      <h2>我们如何使用信息</h2>
+      <h3>技术实现说明</h3>
+      <p>为了实现链接预览功能，PeekLink 使用以下技术方案：</p>
+      <ul>
+        <li><strong>内容脚本注入</strong>：在您访问的网页上监听长按事件，识别链接并创建预览窗口</li>
+        <li><strong>声明式网络请求（declarativeNetRequest）</strong>：临时修改特定网站的安全策略以启用预览功能（详见下方权限说明）</li>
+        <li><strong>Shadow DOM 技术</strong>：创建隔离的预览界面，防止与原网页样式冲突</li>
+        <li><strong>本地事件处理</strong>：在您的浏览器中本地处理长按和拖拽事件</li>
+        <li><strong>iframe 沙箱技术</strong>：预览内容在安全的 iframe 沙箱环境中运行</li>
+        <li><strong>模块化架构</strong>：使用 ES6 模块系统确保代码安全性和可维护性</li>
+      </ul>
+      <p>所有这些操作都在您的设备上本地完成，不涉及远程服务器通信。</p>
+
+      <h2>权限使用详细说明</h2>
+      
+      <h3>为什么需要访问所有网站</h3>
+      <div class="highlight">
+        <p><strong>权限类型：</strong>访问 http://*/* 和 https://*/* 网站</p>
+        <p><strong>使用目的：</strong></p>
+        <ul>
+          <li>在您访问的任何网页上检测长按链接的操作</li>
+          <li>在当前页面创建悬浮预览窗口</li>
+          <li>加载用户选择预览的任意链接内容</li>
+          <li>注入必要的脚本以实现预览功能</li>
+        </ul>
+        <p><strong>为什么必需：</strong>由于无法预知用户会在哪些网站使用预览功能，我们需要能够在所有网站上运行。这是实现"在任意网页长按任意链接进行预览"这一核心功能的技术要求。</p>
+        <p><strong>我们承诺不会：</strong></p>
+        <ul>
+          <li>记录或上传您的浏览历史</li>
+          <li>收集或分析页面内容</li>
+          <li>修改网页原有内容（仅添加预览窗口）</li>
+          <li>在后台持续运行或监控</li>
+        </ul>
+      </div>
+
+      <h2>安全保障措施</h2>
+      <div class="highlight">
+        <h3>技术安全措施</h3>
+        <ul>
+          <li><strong>Shadow DOM 隔离：</strong>所有预览界面使用 Shadow DOM 技术，完全隔离与网页的样式和脚本交互</li>
+          <li><strong>iframe 沙箱保护：</strong>预览内容运行在严格的沙箱环境中，防止恶意代码执行</li>
+          <li><strong>输入验证：</strong>所有用户输入和消息传递都经过严格验证，防止注入攻击</li>
+          <li><strong>错误处理：</strong>安全的错误处理机制，不会暴露系统内部信息</li>
+          <li><strong>自动过期机制：</strong>安全规则在10分钟后自动过期，限制潜在风险暴露时间</li>
+        </ul>
+      </div>
+
+      <h3>网络请求修改权限（declarativeNetRequest）</h3>
+      <div class="highlight">
+        <p><strong>具体行为：</strong></p>
+        <ul>
+          <li>当您触发预览时，临时移除目标网站的以下响应头：
+            <ul>
+              <li>X-Frame-Options（阻止网页被嵌入的安全策略）</li>
+              <li>Content-Security-Policy 中的 frame-ancestors 指令</li>
+            </ul>
+          </li>
+          <li>修改仅对预览的特定网站生效</li>
+          <li>规则在10分钟后自动失效，确保安全性</li>
+        </ul>
+        <p><strong>为什么需要：</strong>现代网站普遍设置了防止被嵌入iframe的安全策略。不进行此修改，约70%的主流网站（如 GitHub、Twitter、Reddit等）将无法预览。</p>
+        <p><strong>安全措施：</strong></p>
+        <ul>
+          <li>修改是临时的，不会永久改变网站安全设置</li>
+          <li>仅在用户主动触发预览时激活</li>
+          <li>10分钟自动过期机制</li>
+          <li>不影响您正常浏览网页的安全性</li>
+        </ul>
+        <p><strong>风险提示：</strong>虽然风险较低，但临时移除这些安全头可能使预览的网页更容易受到点击劫持攻击。建议仅在信任的网站使用预览功能。</p>
+      </div>
+
+      <h3>其他权限说明</h3>
+      <ul>
+        <li><strong>activeTab：</strong>访问当前活动标签页信息，用于获取页面URL和标题，仅在用户激活扩展时生效</li>
+        <li><strong>storage：</strong>保存您的设置偏好，支持跨设备同步，数据完全本地存储</li>
+        <li><strong>sidePanel：</strong>在浏览器侧边栏显示预览内容，提供更好的浏览体验</li>
+        <li><strong>tabs：</strong>创建新标签页和管理预览相关的标签页操作，不访问标签页内容</li>
+        <li><strong>contextMenus：</strong>添加右键菜单选项"使用 PeekLink 预览"，增强用户交互</li>
+        <li><strong>declarativeNetRequest：</strong>临时修改网络请求头以绕过iframe限制，仅在预览时生效</li>
+      </ul>
+
+      <h2>数据安全</h2>
+      <ul>
+        <li><strong>本地处理</strong>：所有功能在您的浏览器中本地运行，无服务器依赖</li>
+        <li><strong>无服务器通信</strong>：扩展不会向任何远程服务器发送数据或建立连接</li>
+        <li><strong>沙箱隔离</strong>：预览内容在安全的 iframe 沙箱中运行，防止恶意代码执行</li>
+        <li><strong>最小权限原则</strong>：仅申请实现功能所必需的浏览器权限</li>
+        <li><strong>代码审查</strong>：所有代码都经过严格的安全审查，遵循最佳实践</li>
+        <li><strong>开源透明</strong>：核心功能代码逻辑透明，可供用户和安全专家审查</li>
+        <li><strong>及时更新</strong>：定期更新以修复潜在的安全漏洞</li>
+      </ul>
+
+      <h2>第三方服务</h2>
+      <p>PeekLink 不使用任何第三方分析服务、广告网络或数据收集工具。预览的网页内容由原网站直接提供，我们不作为中间代理。</p>
+
+      <h2>Chrome Web Store 合规性</h2>
+      <p>PeekLink 完全符合 Chrome Web Store 的隐私要求：</p>
+      <ul>
+        <li>不收集用户数据</li>
+        <li>权限使用透明且必要</li>
+        <li>不包含恶意代码或误导性功能</li>
+        <li>遵循 Manifest V3 安全标准</li>
+      </ul>
+
+      <h2>用户控制</h2>
+      <h3>设置管理</h3>
+      <p>您可以随时：</p>
+      <ul>
+        <li>通过扩展设置页面修改所有功能偏好</li>
+        <li>禁用或启用扩展功能</li>
+        <li>完全卸载扩展</li>
+      </ul>
+
+      <h3>数据删除</h3>
+      <p>要删除所有本地存储的设置数据，您可以：</p>
+      <ul>
+        <li>在扩展设置中点击"重置所有设置"</li>
+        <li>或直接卸载扩展（将自动删除所有相关数据）</li>
+      </ul>
+
+      <h2>政策更新</h2>
+      <p>如果我们对此隐私政策进行重大更改，我们会通过扩展更新通知您。继续使用 PeekLink 即表示您同意更新后的政策。</p>
+
+      <h2>透明度保证</h2>
+      <p>PeekLink 的代码逻辑透明，您可以通过以下方式验证我们的隐私承诺：</p>
+      <ul>
+        <li><strong>本地验证：</strong>查看扩展的源代码（右键扩展图标 → 管理扩展 → 详细信息）</li>
+        <li><strong>网络监控：</strong>使用 Chrome 开发者工具验证无外部网络请求</li>
+        <li><strong>存储审查：</strong>检查 Chrome 设置中的存储数据（chrome://settings/content/all）</li>
+        <li><strong>权限审查：</strong>所有权限使用均透明可查（chrome://extensions）</li>
+        <li><strong>代码审查：</strong>可以查看扩展安装目录中的所有源代码文件</li>
+        <li><strong>行为监控：</strong>使用网络监控工具确认扩展不进行任何外部通信</li>
+      </ul>
+
+      <div class="contact">
+        <h2>联系我们</h2>
+        <p>如果您对此隐私政策有任何疑问或建议，请通过以下方式联系我们：</p>
+        <ul>
+          <li><strong>邮箱：</strong><a href="mailto:codestation0@gmail.com">codestation0@gmail.com</a></li>
+          <li><strong>Chrome Web Store：</strong>通过扩展页面的评论功能</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
