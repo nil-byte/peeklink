@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
   <link rel="apple-touch-icon" href="icon128.png">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
-    
+
     :root {
       /* Apple System Colors - Minimal */
       --system-blue: #007AFF;
@@ -16,24 +17,24 @@
       --system-gray: #8E8E93;
       --system-gray-light: #C7C7CC;
       --system-gray-extra-light: #F2F2F7;
-      
+
       /* Minimal Background Colors */
       --bg-primary: #FFFFFF;
       --bg-secondary: #FAFAFA;
       --bg-glass: rgba(255, 255, 255, 0.8);
       --bg-glass-light: rgba(255, 255, 255, 0.6);
-      
+
       /* Minimal Text Colors */
       --text-primary: #000000;
       --text-secondary: #3C3C43;
       --text-tertiary: rgba(60, 60, 67, 0.6);
       --text-quaternary: rgba(60, 60, 67, 0.3);
-      
+
       /* Minimal Shadows & Effects */
       --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.1);
       --shadow-float: 0 4px 20px rgba(0, 0, 0, 0.08);
       --shadow-elevated: 0 8px 30px rgba(0, 0, 0, 0.12);
-      
+
       /* Minimal Spacing */
       --spacing-xs: 4px;
       --spacing-sm: 8px;
@@ -42,7 +43,7 @@
       --spacing-xl: 32px;
       --spacing-2xl: 48px;
       --spacing-3xl: 64px;
-      
+
       /* Apple Radius */
       --radius-sm: 8px;
       --radius-md: 12px;
@@ -91,10 +92,10 @@
     .hero {
       padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-xl) var(--spacing-2xl);
       text-align: center;
-      background: linear-gradient(180deg, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(245, 245, 247, 0.8) 60%,
-        rgba(242, 242, 247, 0.6) 100%);
+      background: linear-gradient(180deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(245, 245, 247, 0.8) 60%,
+          rgba(242, 242, 247, 0.6) 100%);
       position: relative;
       overflow: hidden;
     }
@@ -106,17 +107,15 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(
-        circle at center,
-        rgba(0, 122, 255, 0.03) 0%,
-        rgba(0, 122, 255, 0.02) 50%,
-        transparent 70%
-      );
+      background: radial-gradient(circle at center,
+          rgba(0, 122, 255, 0.03) 0%,
+          rgba(0, 122, 255, 0.02) 50%,
+          transparent 70%);
       animation: float 20s ease-in-out infinite;
       z-index: 0;
     }
 
-    .hero > * {
+    .hero>* {
       position: relative;
       z-index: 1;
     }
@@ -126,7 +125,8 @@
       height: 120px;
       margin: 0 auto var(--spacing-lg);
       background: url('icon128.png') center/contain no-repeat;
-      border-radius: 27px; /* Apple's large icon radius */
+      border-radius: 27px;
+      /* Apple's large icon radius */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -144,7 +144,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      color: var(--text-primary); /* Fallback */
+      color: var(--text-primary);
+      /* Fallback */
     }
 
     .subtitle {
@@ -319,7 +320,7 @@
       font-weight: 600;
       font-size: 17px;
       flex-shrink: 0;
-      box-shadow: 
+      box-shadow:
         0 4px 12px rgba(0, 122, 255, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
       position: relative;
@@ -441,7 +442,8 @@
 
     .btn {
       padding: 16px 40px;
-      border-radius: 980px; /* Apple's pill button radius */
+      border-radius: 980px;
+      /* Apple's pill button radius */
       font-size: 19px;
       font-weight: 500;
       line-height: 1.21053;
@@ -475,7 +477,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--system-blue) 0%, var(--system-blue-hover) 100%);
       color: white;
-      box-shadow: 
+      box-shadow:
         0 4px 16px rgba(0, 122, 255, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
@@ -483,7 +485,7 @@
     .btn-primary:hover {
       background: linear-gradient(135deg, var(--system-blue-hover) 0%, #0040A0 100%);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 
+      box-shadow:
         0 8px 24px rgba(0, 122, 255, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
@@ -494,7 +496,7 @@
       -webkit-backdrop-filter: blur(20px);
       color: var(--text-primary);
       border: 1px solid var(--border-color);
-      box-shadow: 
+      box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
@@ -502,7 +504,7 @@
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.9);
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 
+      box-shadow:
         0 6px 16px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
       border-color: rgba(0, 122, 255, 0.2);
@@ -511,9 +513,9 @@
     /* Footer */
     .footer {
       padding: var(--spacing-xl) var(--spacing-2xl);
-      background: linear-gradient(180deg, 
-        rgba(242, 242, 247, 0.8) 0%, 
-        rgba(255, 255, 255, 0.9) 100%);
+      background: linear-gradient(180deg,
+          rgba(242, 242, 247, 0.8) 0%,
+          rgba(255, 255, 255, 0.9) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border-color);
@@ -567,10 +569,10 @@
 
     /* Tips Section */
     .tips {
-      background: linear-gradient(135deg, 
-        rgba(0, 122, 255, 0.04) 0%, 
-        rgba(0, 122, 255, 0.02) 50%,
-        rgba(0, 122, 255, 0.01) 100%);
+      background: linear-gradient(135deg,
+          rgba(0, 122, 255, 0.04) 0%,
+          rgba(0, 122, 255, 0.02) 50%,
+          rgba(0, 122, 255, 0.01) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       padding: var(--spacing-xl);
@@ -673,6 +675,7 @@
         opacity: 0;
         transform: translateY(40px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -680,9 +683,12 @@
     }
 
     @keyframes float {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0px) rotate(0deg);
       }
+
       50% {
         transform: translateY(-20px) rotate(180deg);
       }
@@ -693,6 +699,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -708,14 +715,32 @@
       opacity: 0;
     }
 
-    .feature-card:nth-child(1) { animation-delay: 0.1s; }
-    .feature-card:nth-child(2) { animation-delay: 0.2s; }
-    .feature-card:nth-child(3) { animation-delay: 0.3s; }
-    .feature-card:nth-child(4) { animation-delay: 0.4s; }
-    .feature-card:nth-child(5) { animation-delay: 0.5s; }
-    .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    .feature-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .feature-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .feature-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .feature-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .feature-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .feature-card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <!-- Hero Section -->
@@ -731,63 +756,64 @@
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" />
             </svg>
           </div>
           <div class="feature-title">长按预览</div>
           <div class="feature-description">长按任意链接 500 毫秒，即可在悬浮窗口中预览目标页面</div>
         </div>
-        
+
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              <path
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
           <div class="feature-title">右键菜单</div>
           <div class="feature-description">右键点击链接，选择"使用 PeekLink 预览"快速打开</div>
         </div>
-        
+
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="3" width="7" height="7" rx="1"/>
-              <rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/>
-              <rect x="14" y="14" width="7" height="7" rx="1"/>
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
             </svg>
           </div>
           <div class="feature-title">多种视图</div>
           <div class="feature-description">支持悬浮窗口、侧边栏和新标签页三种预览方式</div>
         </div>
-        
+
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M8 12l2 2 4-4"/>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12l2 2 4-4" />
             </svg>
           </div>
           <div class="feature-title">完全交互</div>
           <div class="feature-description">在预览窗口中滚动、点击、填写表单，如同真实浏览</div>
         </div>
-        
+
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.5L16.5 4H10a2 2 0 00-2 2z"/>
-              <polyline points="14,4 14,7 17,7"/>
+              <path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.5L16.5 4H10a2 2 0 00-2 2z" />
+              <polyline points="14,4 14,7 17,7" />
             </svg>
           </div>
           <div class="feature-title">智能绕过</div>
           <div class="feature-description">自动处理 iframe 限制，让更多网站支持预览</div>
         </div>
-        
+
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
           <div class="feature-title">隐私安全</div>
@@ -799,8 +825,8 @@
       <div class="quick-start">
         <h2 class="section-title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 1v6m0 6v6"/>
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 1v6m0 6v6" />
           </svg>
           <span>快速开始</span>
         </h2>
@@ -812,7 +838,7 @@
               <div class="step-description">在任何网页上找到您想预览的链接</div>
             </div>
           </div>
-          
+
           <div class="step">
             <div class="step-number">2</div>
             <div class="step-content">
@@ -820,7 +846,7 @@
               <div class="step-description">将鼠标悬停在链接上并长按，或使用右键菜单</div>
             </div>
           </div>
-          
+
           <div class="step">
             <div class="step-number">3</div>
             <div class="step-content">
@@ -835,8 +861,8 @@
       <div class="tips">
         <h2 class="section-title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8v8"/>
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v8" />
           </svg>
           <span>专业技巧</span>
         </h2>
@@ -854,8 +880,8 @@
       <div class="shortcuts">
         <h2 class="section-title">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="5" width="18" height="14" rx="2"/>
-            <path d="M7 9h4m-4 4h6"/>
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M7 9h4m-4 4h6" />
           </svg>
           <span>快捷键</span>
         </h2>
@@ -885,13 +911,14 @@
       <button class="btn btn-primary" onclick="window.close()">
         <span>开始使用</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M5 12h14l-7-7m7 7l-7 7"/>
+          <path d="M5 12h14l-7-7m7 7l-7 7" />
         </svg>
       </button>
-      <button class="btn btn-secondary" onclick="chrome.runtime.openOptionsPage ? chrome.runtime.openOptionsPage() : window.open('chrome://extensions/?id=' + chrome.runtime.id)">
+      <button class="btn btn-secondary" id="openSettingsBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
         </svg>
         <span>打开设置</span>
       </button>
@@ -905,9 +932,51 @@
         <a href="https://chromewebstore.google.com/detail/peeklink" target="_blank">Chrome 商店</a>
       </div>
       <div class="footer-text">
-        © 2025 PeekLink v1.0.0 · Made with ❤️ for better browsing
+        © 2025 PeekLink v1.0.0 · Made with care for better browsing
       </div>
     </div>
   </div>
+
+  <script>
+    // 处理设置按钮点击
+    document.getElementById('openSettingsBtn').addEventListener('click', function() {
+      try {
+        // 检查是否在扩展环境中
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+          if (chrome.runtime.openOptionsPage) {
+            // 使用扩展API打开设置页面
+            chrome.runtime.openOptionsPage();
+          } else if (chrome.runtime.id) {
+            // 降级方案：直接打开设置页面
+            window.open(chrome.runtime.getURL('settings.html'));
+          } else {
+            // 再次降级：打开扩展管理页面
+            window.open('chrome://extensions/');
+          }
+        } else {
+          // 如果不在扩展环境中，提供友好提示
+          alert('请在Chrome扩展中访问此页面以打开设置');
+        }
+      } catch (error) {
+        console.warn('无法打开设置页面:', error);
+        // 最终降级方案：尝试打开本地设置页面
+        try {
+          window.open('settings.html');
+        } catch (e) {
+          alert('无法打开设置页面，请右键点击扩展图标选择"选项"');
+        }
+      }
+    });
+
+    // 处理获取扩展按钮点击  
+    const primaryBtn = document.querySelector('.btn-primary');
+    if (primaryBtn) {
+      primaryBtn.addEventListener('click', function() {
+        // 跳转到Chrome Web Store或下载页面
+        window.open('https://chromewebstore.google.com/');
+      });
+    }
+  </script>
 </body>
+
 </html>
