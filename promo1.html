@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeekLink - 智能链接预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 30%, #ecf5ff 70%, #ffffff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #1d1d1f;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(52, 199, 89, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 30%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 120px;
+        }
+
+        .feature-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 122, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 122, 255, 0.15);
+        }
+
+        .highlight-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007aff;
+        }
+
+        .highlight-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1d1d1f;
+            white-space: nowrap;
+        }
+
+        .description-text {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 17px;
+            line-height: 1.5;
+            color: #6e6e73;
+        }
+
+        .description-text p {
+            margin-bottom: 12px;
+        }
+
+        .description-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .logo {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 32px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 25px 50px rgba(0, 122, 255, 0.15),
+                0 10px 25px rgba(0, 122, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(52, 199, 89, 0.05));
+            border-radius: 34px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow:
+                0 35px 70px rgba(0, 122, 255, 0.2),
+                0 15px 35px rgba(0, 122, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        .logo img {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+        }
+
+        .main-title {
+            font-size: 84px;
+            font-weight: 700;
+            letter-spacing: -2.5px;
+            line-height: 0.95;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #424245 30%, #1d1d1f 70%, #424245 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 0;
+            color: #6e6e73;
+            max-width: 600px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 48px 36px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.03),
+                0 8px 20px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow:
+                0 40px 80px rgba(0, 122, 255, 0.08),
+                0 16px 40px rgba(0, 122, 255, 0.04);
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #007aff 0%, #0051d5 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.3);
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+
+        .feature-description {
+            font-size: 17px;
+            line-height: 1.5;
+            color: #6e6e73;
+        }
+
+        .decorative-blur {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .blur-1 {
+            top: -200px;
+            right: -200px;
+        }
+
+        .blur-2 {
+            bottom: -200px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(52, 199, 89, 0.08) 0%, transparent 70%);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .main-title {
+                font-size: 48px;
+            }
+
+            .subtitle {
+                font-size: 22px;
+            }
+
+            .feature-highlights {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .description-text {
+                font-size: 16px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .feature-card {
+                padding: 36px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="decorative-blur blur-1"></div>
+    <div class="decorative-blur blur-2"></div>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="logo">
+                <img src="icon128.png" alt="PeekLink" />
+            </div>
+            <h1 class="main-title">PeekLink</h1>
+            <p class="subtitle">一键预览任何链接<br>无需离开当前页面</p>
+            <div class="feature-highlights">
+                <div class="highlight-item">
+                    <span class="highlight-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 3L11 6H14C14.5 6 15 6.5 15 7V13C15 13.5 14.5 14 14 14H4C3.5 14 3 13.5 3 13V7C3 6.5 3.5 6 4 6H7L9 3Z"
+                                stroke="currentColor" stroke-width="1.5" />
+                            <path d="M6 9L8 11L12 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="highlight-text">长按即预览</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M2 7H16" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="4" cy="5.5" r="0.5" fill="currentColor" />
+                            <circle cx="5.5" cy="5.5" r="0.5" fill="currentColor" />
+                            <circle cx="7" cy="5.5" r="0.5" fill="currentColor" />
+                            <path d="M6 10L8 12L12 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="highlight-text">智能绕过限制</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="2" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M7 6H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M7 9H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M7 12H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            <circle cx="5" cy="6" r="0.5" fill="currentColor" />
+                            <circle cx="5" cy="9" r="0.5" fill="currentColor" />
+                        </svg>
+                    </span>
+                    <span class="highlight-text">侧边栏模式</span>
+                </div>
+            </div>
+            <div class="description-text">
+                <p>支持绕过部分网站的iframe限制，提供完整预览体验</p>
+                <p>让每次链接点击都成为一次优雅的探索之旅</p>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 16C8 16 12 12 16 12C20 12 24 16 24 16C24 16 20 20 16 20C12 20 8 16 8 16Z"
+                            stroke="currentColor" stroke-width="2" />
+                        <circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="2" />
+                        <path d="M4 4L28 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">即时预览</h3>
+                <p class="feature-description">长按链接即可瞬间预览，无需离开当前页面</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="5" y="8" width="22" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                        <path d="M5 12H27" stroke="currentColor" stroke-width="2" />
+                        <circle cx="8" cy="10" r="0.5" fill="currentColor" />
+                        <circle cx="10" cy="10" r="0.5" fill="currentColor" />
+                        <circle cx="12" cy="10" r="0.5" fill="currentColor" />
+                        <path d="M10 16L14 20L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">智能突破</h3>
+                <p class="feature-description">绕过网站限制，提供完整的预览体验</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="4" width="20" height="24" rx="4" stroke="currentColor" stroke-width="2" />
+                        <path d="M12 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M12 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M12 20H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <circle cx="9" cy="12" r="1" fill="currentColor" />
+                        <circle cx="9" cy="16" r="1" fill="currentColor" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">侧边栏模式</h3>
+                <p class="feature-description">专注浏览模式，并排对比查看内容</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16 4L20.5 9H26C27.1 9 28 9.9 28 11V25C28 26.1 27.1 27 26 27H6C4.9 27 4 26.1 4 25V11C4 9.9 4.9 9 6 9H11.5L16 4Z"
+                            stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                        <path
+                            d="M16 15C17.66 15 19 16.34 19 18C19 19.66 17.66 21 16 21C14.34 21 13 19.66 13 18C13 16.34 14.34 15 16 15Z"
+                            stroke="currentColor" stroke-width="2" />
+                        <path d="M22 12L24 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">优雅设计</h3>
+                <p class="feature-description">精美界面设计，融入任何网站不突兀</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
