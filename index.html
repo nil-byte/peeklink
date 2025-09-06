@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PeekLink - 即时链接预览扩展</title>
+  <title>PeekLink - 悬停、预览、无需跳转</title>
+  <link rel="icon" type="image/png" href="icon32.png">
+  <link rel="apple-touch-icon" href="icon128.png">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
     :root {
       --system-blue: #007AFF;
-      --system-green: #34C759;
-      --system-purple: #5856D6;
-      --background-primary: #ffffff;
-      --background-secondary: #f5f5f7;
-      --text-primary: #1d1d1f;
-      --text-secondary: #86868b;
-      --separator: #e5e5e7;
-      --spacing-sm: 0.5rem;
-      --spacing-md: 1rem;
-      --spacing-lg: 1.5rem;
-      --spacing-xl: 2rem;
+      --system-blue-hover: #0056CC;
+      --system-gray-light: #F5F5F7;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --bg-primary: #FFFFFF;
+      --bg-glass: rgba(255, 255, 255, 0.7);
+      --bg-glass-light: #FBFBFC;
+      --text-primary: #1D1D1F;
+      --text-secondary: #3C3C43;
+      --text-tertiary: rgba(60, 60, 67, 0.6);
+      --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.1);
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
     }
 
     * {
@@ -26,272 +39,464 @@
       box-sizing: border-box;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--background-primary);
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
       color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .hero p {
-      font-size: 1.25rem;
-      opacity: 0.95;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    .btn-primary {
-      background: white;
-      color: #764ba2;
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 2px solid white;
+      line-height: 1.5;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 0 var(--spacing-lg);
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 4rem;
+    /* Header */
+    .header {
+      padding: var(--spacing-md) 0;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .header-scrolled {
+        border-color: var(--border-color);
+        box-shadow: var(--shadow-subtle);
     }
 
-    .feature {
-      text-align: center;
-      padding: 2rem;
-      border-radius: 12px;
-      background: var(--background-secondary);
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-lg);
     }
 
-    .feature h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 21px;
+      font-weight: 600;
+      text-decoration: none;
       color: var(--text-primary);
     }
 
-    .feature p {
-      color: var(--text-secondary);
+    .logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
     }
 
-    .section {
-      padding: 4rem 0;
-      border-top: 1px solid var(--separator);
-    }
-
-    .section h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .privacy-notice {
-      background: var(--background-secondary);
-      padding: 2rem;
-      border-radius: 12px;
-      margin: 2rem 0;
-    }
-
-    .privacy-notice h3 {
-      color: var(--system-green);
-      margin-bottom: 1rem;
-    }
-
-    .privacy-notice ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .privacy-notice li {
-      padding: 0.5rem 0;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    .privacy-notice li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--system-green);
-      font-weight: bold;
-    }
-
-    .footer {
-      background: var(--background-secondary);
-      padding: 2rem;
-      text-align: center;
-      color: var(--text-secondary);
-    }
-
-    .footer a {
-      color: var(--system-blue);
+    .nav-links a {
       text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 17px;
+      transition: color 0.2s;
     }
 
-    .footer a:hover {
-      text-decoration: underline;
+    .nav-links a:hover {
+      color: var(--system-blue);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--system-blue);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--system-blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 122, 255, 0.35);
+    }
+    
+    .btn-primary::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255,255,255,0.7);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%, -50%);
+        transform-origin: 50% 50%;
+    }
+
+    @keyframes ripple {
+        0% {
+            transform: scale(0, 0) translate(-50%, -50%);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(20, 20) translate(-50%, -50%);
+            opacity: 0;
+        }
+    }
+    
+    .btn-primary:focus:not(:active)::after {
+        animation: ripple 1s ease-out;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: var(--spacing-3xl) 0;
+      background: radial-gradient(circle at 50% 0%, #F7F9FF 0%, #FFFFFF 50%);
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-md);
+      background: linear-gradient(135deg, #1D1D1F 0%, #3C3C43 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero .subtitle {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-xl);
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-image-placeholder {
+        margin-top: var(--spacing-3xl);
+        padding: var(--spacing-md);
+        background: var(--bg-glass-light);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-elevated);
+        border: 1px solid var(--border-color);
+        display: inline-block;
+        width: 100%;
+        max-width: 800px;
+    }
+    
+    .mock-browser-window {
+        background: white;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+    
+    .mock-browser-header {
+        height: 36px;
+        background: var(--system-gray-light);
+        display: flex;
+        align-items: center;
+        padding: 0 var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+    
+    .mock-browser-dot {
+        width: 12px; height: 12px; border-radius: 50%;
+    }
+    
+    .mock-browser-content {
+        height: 400px;
+        background: url(icon256.png) center center no-repeat;
+        background-size: 128px 128px;
+        opacity: 0.1;
+    }
+
+    /* Features Section */
+    .section {
+      padding: var(--spacing-3xl) 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .feature-card {
+      padding: var(--spacing-xl);
+      background: var(--bg-glass-light);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      transition: all 0.3s;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-in 0.5s forwards;
+    }
+    
+    @keyframes fade-in {
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-elevated);
+        border-color: rgba(0, 122, 255, 0.2);
+        background: white;
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: var(--spacing-lg);
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.08) 0%, rgba(0, 122, 255, 0.04) 100%);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 122, 255, 0.1);
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--system-blue);
+    }
+
+    .feature-title {
+      font-size: 21px;
+      font-weight: 600;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .feature-description {
+      font-size: 17px;
+      color: var(--text-secondary);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+        color: white;
+        padding: var(--spacing-3xl) var(--spacing-xl);
+        border-radius: var(--radius-xl);
+        text-align: center;
+        margin: var(--spacing-2xl) 0;
+    }
+    
+    .cta-section h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .cta-section p {
+        font-size: 19px;
+        opacity: 0.9;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .btn-cta {
+        background: white;
+        color: var(--system-blue);
+        font-weight: 600;
+        padding: 14px 28px;
+    }
+    
+    .btn-cta:hover {
+        transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border-color);
+      padding: var(--spacing-2xl) 0;
+      color: var(--text-tertiary);
+    }
+    
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-lg);
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      margin: 0 var(--spacing-md);
+      font-size: 15px;
+    }
+    
+    .footer-links a:hover {
+        color: var(--system-blue);
+        text-decoration: underline;
     }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
+      .hero h1 { font-size: 48px; }
+      .hero .subtitle { font-size: 21px; }
+      .section-title { font-size: 36px; }
+      .nav-links { display: none; } 
+      .footer-container { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
+
 <body>
-  <div class="hero">
-    <h1>🔍 PeekLink</h1>
-    <p>即时预览任何链接内容，无需离开当前页面</p>
-    <div class="buttons">
-      <a href="https://chromewebstore.google.com/detail/peeklink" class="btn btn-primary">安装扩展</a>
-      <a href="privacy.html" class="btn btn-secondary">隐私政策</a>
-    </div>
-  </div>
 
-  <div class="container">
-    <div class="features">
-      <div class="feature">
-        <div class="feature-icon">⚡</div>
-        <h3>即时预览</h3>
-        <p>长按链接500毫秒，立即在悬浮窗口中预览目标页面</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🖱️</div>
-        <h3>完全交互</h3>
-        <p>在预览窗口中滚动、点击、填写表单，获得完整的浏览体验</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🔓</div>
-        <h3>智能绕过</h3>
-        <p>自动处理iframe限制，让更多网站支持预览功能</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🎯</div>
-        <h3>灵活操作</h3>
-        <p>支持拖拽移动、调整大小、固定位置、侧边栏和新标签页打开</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🛡️</div>
-        <h3>安全隔离</h3>
-        <p>使用Shadow DOM和iframe沙箱技术，确保预览内容安全隔离</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🔒</div>
-        <h3>隐私优先</h3>
-        <p>不收集任何用户数据，所有处理都在本地完成</p>
-      </div>
+  <header class="header" id="main-header">
+    <div class="container nav-container">
+      <nav class="nav">
+        <a href="#" class="logo">
+          <img src="icon32.png" alt="PeekLink Logo">
+          <span>PeekLink</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">功能</a>
+          <a href="privacy.html">隐私政策</a>
+          <a href="https://github.com/nil-byte/peeklink" target="_blank">GitHub</a>
+        </div>
+      </nav>
+      <a href="https://chromewebstore.google.com/detail/peeklink/hdaniddaeomoofbnoagkncfofebaablc" target="_blank" class="btn btn-primary">免费获取</a>
     </div>
+  </header>
 
-    <div class="section">
-      <h2>隐私与安全</h2>
-      <div class="privacy-notice">
-        <h3>🔒 我们的隐私承诺</h3>
-        <ul>
-          <li>不收集、存储或传输任何个人浏览数据</li>
-          <li>所有功能在您的浏览器中本地运行</li>
-          <li>不包含任何跟踪器或分析工具</li>
-          <li>代码逻辑透明，安全可靠</li>
-          <li>遵循Chrome Web Store安全标准</li>
-        </ul>
-        <p style="margin-top: 1.5rem;">
-          <a href="privacy.html" style="font-weight: 600;">查看完整隐私政策 →</a>
-        </p>
+  <main class="container">
+    <section class="hero">
+      <h1>悬停, 预览, 无需跳转</h1>
+      <p class="subtitle">PeekLink 为您带来极致的浏览效率。只需长按任何链接,即可在优雅的浮窗中即时预览,告别频繁的标签页切换。</p>
+      <a href="https://chromewebstore.google.com/detail/peeklink/hdaniddaeomoofbnoagkncfofebaablc" target="_blank" class="btn btn-primary" style="font-size: 19px; padding: 14px 28px;">立即安装, 提升效率</a>
+      
+      <div class="hero-image-placeholder">
+          <div class="mock-browser-window">
+              <div class="mock-browser-header">
+                  <div class="mock-browser-dot" style="background:#FF5F56;"></div>
+                  <div class="mock-browser-dot" style="background:#FFBD2E;"></div>
+                  <div class="mock-browser-dot" style="background:#27C93F;"></div>
+              </div>
+              <div class="mock-browser-content"></div>
+          </div>
       </div>
-    </div>
 
-    <div class="section">
-      <h2>使用方法</h2>
-      <div style="background: var(--background-secondary); padding: 2rem; border-radius: 12px;">
-        <ol style="padding-left: 1.5rem; line-height: 2;">
-          <li>安装PeekLink扩展</li>
-          <li>在任意网页上，长按链接500毫秒</li>
-          <li>预览窗口自动弹出</li>
-          <li>在预览窗口中自由浏览</li>
-          <li>使用工具栏按钮进行更多操作</li>
-        </ol>
-        <p style="margin-top: 1rem; color: var(--text-secondary);">
-          提示：您也可以右键点击链接，选择"使用 PeekLink 预览"
-        </p>
-      </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2>技术特性</h2>
-      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-        PeekLink 采用先进的技术架构，提供流畅稳定的预览体验
-      </p>
-      <div style="text-align: center;">
-        <ul style="list-style: none; padding: 0; line-height: 2;">
-          <li>✨ 基于 Manifest V3 构建，符合最新 Chrome 标准</li>
-          <li>🚀 事件驱动架构，响应迅速</li>
-          <li>🔧 模块化设计，性能优化</li>
-          <li>🛡️ 多层安全防护，保障用户隐私</li>
-        </ul>
+    <section class="section" id="features">
+      <h2 class="section-title">优雅, 强大, 高效</h2>
+      <div class="features-grid">
+        <div class="feature-card" style="animation-delay: 0.1s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
+          <h3 class="feature-title">即时预览</h3>
+          <p class="feature-description">长按链接500毫秒,立即可在当前页面的浮窗中预览目标内容,无需打断您的工作流。</p>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.2s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </div>
+          <h3 class="feature-title">完整交互体验</h3>
+          <p class="feature-description">预览窗口不是截图,而是功能齐全的浏览器。您可以滚动、点击、填写表单,甚至观看视频。</p>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.3s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="feature-title">隐私至上</h3>
+          <p class="feature-description">我们绝不收集您的任何浏览数据。所有操作均在您的本地浏览器中完成,安全可靠。</p>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.4s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.08V8l-6-4h-4l-6 4v3.08"/><path d="M12 22v-8H4.17L3 11.62V8h18v3.62L19.83 14H12z"/></svg>
+          </div>
+          <h3 class="feature-title">智能兼容</h3>
+          <p class="feature-description">采用先进技术,能智能绕过多数网站的iFrame嵌入限制,让预览无处不在。</p>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.5s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="feature-title">灵活布局</h3>
+          <p class="feature-description">支持拖拽移动、调整大小、固定窗口、侧边栏模式和新标签页打开,满足您的各种需求。</p>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.6s;">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="feature-title">高度可定制</h3>
+          <p class="feature-description">从触发延迟到窗口默认大小,几乎所有功能都可自定义,让 PeekLink 成为您的专属工具。</p>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>准备好改变您的浏览方式了吗?</h2>
+        <p>PeekLink 完全免费, 并在 Chrome 网上应用店安全托管。</p>
+        <a href="https://chromewebstore.google.com/detail/peeklink/hdaniddaeomoofbnoagkncfofebaablc" target="_blank" class="btn btn-cta">
+            <span>免费安装</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+    </section>
+
+  </main>
 
   <footer class="footer">
-    <p>© 2025 PeekLink. 所有权利保留.</p>
-    <p style="margin-top: 1rem;">
-      <a href="privacy.html">隐私政策</a> | 
-      <a href="mailto:codestation0@gmail.com">联系我们</a>
-    </p>
+    <div class="container footer-container">
+        <p>&copy; 2025 PeekLink. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html">隐私政策</a>
+            <a href="https://github.com/nil-byte/peeklink/discussions" target="_blank">联系我们</a>
+            <a href="welcome.html">欢迎页面</a>
+        </div>
+    </div>
   </footer>
+  
+  <script>
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 10) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+    });
+  </script>
+
 </body>
+
 </html>
